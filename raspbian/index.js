@@ -13,6 +13,8 @@ var esp = {
   ips: [
     '192.168.111.102', // Pascal: Étoile
     '192.168.111.103', // Sébastien: Coeur
+//  '192.168.111.108', // Linux computer
+    '192.168.111.115', // Jean-François Lambert: 1st batch
   ]
 };
 
@@ -32,16 +34,18 @@ var sp = new SerialPort("/dev/ttyACM0", {
 var command2json = {
   "black":     '{"color": [0, 0, 0]}',
 
-  "red":     '{"color": [200, 0, 0]}',
-  "green":   '{"color": [0, 200, 0]}',
-  "blue":    '{"color": [0, 0, 200]}',
+  "red":     '{"color": [50, 0, 0]}',
+  "green":   '{"color": [0, 50, 0]}',
+  "blue":    '{"color": [0, 0, 50]}',
 
-  "yellow":  '{"color": [200, 200, 0]}',
-  "fuchsia": '{"color": [200, 0, 200]}',
-  "aqua":    '{"color": [0, 200, 200]}',
+  "fuchsia": '{"color": [50, 0, 50]}',
+  "aqua":    '{"color": [0, 50, 50]}',
 
-  "purple":  '{"color": [80, 0, 80]}',
-  "coral":   '{"color": [200, 120, 0]}',
+  "purple":  '{"color": [20, 0, 20]}',
+  "coral":   '{"color": [50, 30, 0]}',
+
+  "rainbow":  '{"rainbow": true}',
+  "star":  '{"star": true}',
 };
 
 var serial2command = {
@@ -49,12 +53,14 @@ var serial2command = {
   "21-167-101-68-147": 'green',
   "100-24-32-150-202": 'blue',
 
-  "5-22-122-68-45":    'yellow',
   "37-170-56-68-243":  'fuchsia',
   "5-254-49-68-142":   'aqua',
 
   // "":  'purple', // Ligth fushsia
   "85-94-55-68-120":   'coral',
+
+  "5-22-122-68-45":    'rainbow',
+  "197-146-27-68-8":   'star',
 };
 
 var serial2json = {};
