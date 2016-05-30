@@ -13,6 +13,10 @@ var esp = {
   ips: [
     '192.168.111.102', // Pascal: Étoile
     '192.168.111.103', // Sébastien: Coeur
+    // '192.168.111.104', // ???
+    '192.168.111.105', // Sébastien: module #5
+    '192.168.111.106', // Sébastien: module #6
+
 //  '192.168.111.108', // Linux computer
     '192.168.111.115', // Jean-François Lambert: 1st batch
   ]
@@ -45,7 +49,8 @@ var command2json = {
   "coral":   '{"color": [50, 30, 0]}',
 
   "rainbow":  '{"rainbow": true}',
-  "star":  '{"star": true}',
+  "star":     '{"star": true}',
+  "dot":      '{"dot": true}',
 };
 
 var serial2command = {
@@ -61,6 +66,8 @@ var serial2command = {
 
   "5-22-122-68-45":    'rainbow',
   "197-146-27-68-8":   'star',
+
+  "117-57-56-68-48":   'dot',
 };
 
 var serial2json = {};

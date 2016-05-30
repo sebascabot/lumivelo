@@ -5,14 +5,14 @@ Arduino (UNO)
 
 Raspbian (RaspberryPi)
 
+  To provide IP, we use DHCP capability of `dnsmasq`
+
   To provide a Wifi access point we use `hostapd`
 
         SSID: rfid
     Password: untourlanuit
 
-  To provide IP, we use DHCP capability of `dnsmasq`
-
-  To send UDP packet to all ESP, we use a nodejs application.
+  To send UDP message to all ESP, we use a nodejs assplication
 
 
 NodeMCU (ESP8266)

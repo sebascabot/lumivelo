@@ -34,6 +34,10 @@ s:on("receive", function(s, json)
     elseif (cmd == 'star') then
         tmr.stop(0)
         dofile('complement.lua')
+    elseif (cmd == 'dot') then
+        -- fixme: Make nice 4 dot animation
+      pixelColor = string.char(11,22,33)
+      ws2812.writergb(2, pixelColor:rep(ledsLen))
     end
   end
 end

@@ -1,12 +1,99 @@
-Install and setup `dnsmasq`
+USB WiFi dongle
+---------------
 
-  > sudo apt-get install dnsmasq
+  1. Configure wireless interface
 
-Install and setup `hostapd`
+     > sudo vi /etc/network/interfaces
 
-  > sudo apt-get install hostapd
+     Comment out all line refering to wpa_supplicant and any other wlan# interface.
 
-Install `nodejs` and install `lumivelo` dependency
+     Add the following lines
 
-  > npm install
-  > node index.js
+        allow-hotplug wlan0
+        iface wlan0 inet static
+        address 192.168.111.1
+        netmask 255.255.255.0
+        gateway 192.168.111.254
+
+  2. Plug in your WiFi USB dongle.
+
+  3. WiFi USB dongle check
+
+     Not all WiFi chipset can act as an access point.
+
+     > iw list
+
+     The output show all access point capability, if you have an empty output
+     then your dongle can not be use as an access point. Try another one.
+
+dnsmasq
+-------
+
+  1. Install
+
+     > sudo apt-get install dnsmasq
+
+  2. Add configuration file
+
+     > sudo cp dnsmasq/wlan0.conf /etc/dnsmasq.d/.
+
+  3. Add at the end conf-dir=/etc/dnsmasq.d
+
+     > sudo vi /etc/dnsmasq.conf
+
+hostapd
+-------
+
+  1. Install
+
+     > sudo apt-get install hostapd
+
+  2. Add configuration file
+
+     > sudo cp hostapd/hostapd.conf /etc/hostapd/.
+
+  3. Add DAEMON_CONF="/etc/hostapd/hostapd.conf"
+
+     > sudo vi /etc/default/hostapd
+
+nodejs
+------
+
+  1. Install
+
+     > sudo apt-get install npm nodejs-legacy
+
+
+  2. Install all dependancy
+
+     Ref: https://github.com/fivdi/onoff/wiki/Node.js-v0.10.29-and-native-addons-on-the-Raspberry-Pi
+
+     There is a Debian Unstable patch that is disputed for fixing the issue.
+     This patch can be manully applied by replacing the following snippet of code
+     in /usr/include/nodejs/deps/v8/include/v8.h:
+
+       enum WriteOptions {
+         NO_OPTIONS = 0,
+         HINT_MANY_WRITES_EXPECTED = 1,
+         NO_NULL_TERMINATION = 2,
+         PRESERVE_ASCII_NULL = 4,
+       };
+
+     with:
+
+       enum WriteOptions {
+         NO_OPTIONS = 0,
+         HINT_MANY_WRITES_EXPECTED = 1,
+         NO_NULL_TERMINATION = 2,
+         PRESERVE_ASCII_NULL = 4,
+         REPLACE_INVALID_UTF8 = 0
+       };
+
+     Then, we can do as usual
+
+     > npm install
+
+  3. Run the application
+
+     > node index.js
+

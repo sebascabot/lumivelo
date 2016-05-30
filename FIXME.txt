@@ -1,0 +1,2 @@
+If we connect the module in reverse polarity: BOOM! burn
+We should add a protection for this.

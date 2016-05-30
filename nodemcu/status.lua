@@ -1,3 +1,5 @@
+print("MAC: "..wifi.sta.getmac())
+
 v = wifi.sta.status()
 if     v == 0 then print("STA_IDLE")
 elseif v == 1 then print("STA_CONNECTING")
