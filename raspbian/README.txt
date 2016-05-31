@@ -56,6 +56,10 @@ hostapd
 
      > sudo vi /etc/default/hostapd
 
+  4. Add a sleep 4 in the start) section before start-stop-deamon command
+
+     > sudo vi /etc/init.d/hostapd
+
 nodejs
 ------
 
@@ -93,7 +97,9 @@ nodejs
 
      > npm install
 
-  3. Run the application
+  3. Plug-in the Arduino, be sure to have /dev/ttyACM0
+
+  4. Run the application
 
      > node index.js
 

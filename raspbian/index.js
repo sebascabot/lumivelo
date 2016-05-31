@@ -1,5 +1,10 @@
 #!/usr/bin/env node
 
+var arduinoSerial = {
+    dev: "/dev/ttyACM0",
+    speed: 115200
+}
+
 var dgram = require('dgram');
 var assert = require('assert');
 var util = require("util");
@@ -27,8 +32,8 @@ var esp = {
 // ------------------------------------------------------------------------------
 var serialport = require("serialport");
 var SerialPort = serialport.SerialPort;
-var sp = new SerialPort("/dev/ttyACM0", {
-  baudrate: 115200,
+var sp = new SerialPort(arduinoSerial.dev, {
+  baudrate: arduinoSerial.speed,
   parser: serialport.parsers.readline("\n")
 });
 
