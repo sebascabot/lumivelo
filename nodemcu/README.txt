@@ -8,6 +8,10 @@ Upload the files
      status.lua : Display connect status
      server.lua : Listen for UDP data and display proper light pattern
 
+    rainbow.lua : Custom effect
+       star.lua : Custom effect
+        doc.lua : Custom effect
+
        init.lua : call the three above in sequence at ESP/NodeMCU power up.
 
 

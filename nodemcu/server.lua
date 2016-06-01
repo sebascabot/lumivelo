@@ -33,7 +33,8 @@ s:on("receive", function(s, json)
         tmr.stop(0)
 
         fxFilename = arg..'.lua'
-        if (file.exists(fxFilename)) then
+        files = file.list()
+        if (files[fxFilename]) then
           dofile(fxFilename)
         else
           print('Missing FX '..arg)

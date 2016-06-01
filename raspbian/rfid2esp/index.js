@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 var arduinoSerial = {
-    dev: "/dev/ttyACM0",
+    dev: "/dev/ttyUSB0", // Arduino Nano
+    dev: "/dev/ttyACM0", // Arduino UNO
     speed: 115200
 }
 
