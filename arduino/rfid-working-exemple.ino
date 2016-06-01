@@ -1,19 +1,25 @@
 /*
-   Read a card using a mfrc522 reader on your SPI interface
+    Read a card using a mfrc522 reader on your SPI interface.
+
     Pin layout should be as follows (on Arduino Uno):
+
     MOSI: Pin 11 / ICSP-4
     MISO: Pin 12 / ICSP-1
-    SCK: Pin 13 / ISCP-3
-    SS: Pin 10
-    RST: Pin 5
+     SCK: Pin 13 / ISCP-3
+      SS: Pin 10
+     RST: Pin 5
 */
+
 #include <SPI.h>
 #include <RFID.h>
+
 #define SS_PIN 10
 #define RST_PIN 5
+
 RFID rfid(SS_PIN, RST_PIN);
 
-#define SER_NUM_LEN 5
+#define SERIAL_SPEED 115200
+#define SER_NUM_LEN 4
 unsigned char serNum[SER_NUM_LEN];
 bool inField = false;
 
@@ -40,22 +46,21 @@ void clearSerNum() {
 
 void printSerNum() {
   Serial.print("{\"serialNumber\": \"");
-  Serial.print(serNum[0], DEC);
-  Serial.print("-");
-  Serial.print(serNum[1], DEC);
-  Serial.print("-");
-  Serial.print(serNum[2], DEC);
-  Serial.print("-");
-  Serial.print(serNum[3], DEC);
-  Serial.print("-");
-  Serial.print(serNum[4], DEC);
+
+  for (int i = 0; i < SER_NUM_LEN; ++i) {
+    if (i != 0) {
+      Serial.print("-");
+    }
+    Serial.print(serNum[i], HEX);
+  }
+
   Serial.print("\", \"inField\": ");
   Serial.print(inField, DEC);
   Serial.println("}");
 }
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(SERIAL_SPEED);
   SPI.begin();
   rfid.init();
 }

@@ -60,15 +60,15 @@ hostapd
 
      > sudo vi /etc/init.d/hostapd
 
-nodejs
-------
+nodejs application
+------------------
 
   1. Install
 
      > sudo apt-get install npm nodejs-legacy
 
 
-  2. Install all dependancy
+  2. Fix v8.h problem
 
      Ref: https://github.com/fivdi/onoff/wiki/Node.js-v0.10.29-and-native-addons-on-the-Raspberry-Pi
 
@@ -95,11 +95,22 @@ nodejs
 
      Then, we can do as usual
 
+  3. Install dependencies
+
+     > cd rfid2esp # Go in nodejs application directory
      > npm install
 
-  3. Plug-in the Arduino, be sure to have /dev/ttyACM0
+  4. Plug-in the Arduino
 
-  4. Run the application
+     Look for the serial device (Ex. /dev/ttyACM0 for UNO or /dev/ttyUSB0 for nano)
+
+     > ls /dev/tty???[0-9]
+
+     Configure `arduinoSerial` in `index.js` to match your serial device tty.
+
+     > vi index.js
+
+  5. Run the application
 
      > node index.js
 
