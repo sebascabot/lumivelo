@@ -53,9 +53,9 @@ var command2json = {
   "purple":  '{"rgb": [20, 0, 20]}',
   "coral":   '{"rgb": [50, 30, 0]}',
 
-  "rainbow": '{"cmd": "rainbow"}',
-  "star":    '{"cmd": "star"   }',
-  "dot":     '{"cmd": "dot"    }',
+  "rainbow": '{"fx": "rainbow"}',
+  "star":    '{"fx": "star"   }',
+  "dot":     '{"fx": "dot"    }',
 };
 
 var serial2command = {

@@ -29,9 +29,17 @@ s:on("receive", function(s, json)
       b = arg[3]
       pixelColor = string.char(r,v,b)
       ws2812.writergb(2, pixelColor:rep(ledsLen))
-    elseif (cmd == 'cmd') then
+    elseif (cmd == 'fx') then
         tmr.stop(0)
-        dofile(arg..'.lua')
+
+        fxFilename = arg..'.lua'
+        if (file.exists(fxFilename)) then
+          dofile(fxFilename)
+        else
+          print('Missing FX '..arg)
+        end
+    else
+          print('ERROR! Unknown command '..cmd)
     end
   end
 end
