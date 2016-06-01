@@ -1,3 +1,4 @@
+-- Setup
 ledsLen = 300
 
 -- Cleanup
@@ -19,25 +20,18 @@ s:on("receive", function(s, json)
   print(json)
 
   data = cjson.decode(json)
-  for cmd, rvb in pairs(data) do
-    if (cmd == 'color') then 
+  for cmd, arg in pairs(data) do
+    if (cmd == 'rgb') then 
       tmr.stop(0) -- cleanup
 
-      r = rvb[1]
-      v = rvb[2]
-      b = rvb[3]
+      r = arg[1]
+      v = arg[2]
+      b = arg[3]
       pixelColor = string.char(r,v,b)
       ws2812.writergb(2, pixelColor:rep(ledsLen))
-    elseif (cmd == 'rainbow') then
+    elseif (cmd == 'cmd') then
         tmr.stop(0)
-        dofile('snake.lua')
-    elseif (cmd == 'star') then
-        tmr.stop(0)
-        dofile('complement.lua')
-    elseif (cmd == 'dot') then
-        -- fixme: Make nice 4 dot animation
-      pixelColor = string.char(11,22,33)
-      ws2812.writergb(2, pixelColor:rep(ledsLen))
+        dofile(arg..'.lua')
     end
   end
 end

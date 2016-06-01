@@ -50,7 +50,7 @@ void clearSerNum() {
 }
 
 void printSerNum() {
-  Serial.print("{\"serialNumber\": \"");
+  Serial.print("{\"serialNumber\":\"");
 
   for (int i = 0; i < SER_NUM_LEN; ++i) {
     if (i != 0) {
@@ -59,9 +59,7 @@ void printSerNum() {
     Serial.print(serNum[i], HEX);
   }
 
-  Serial.print("\", \"inField\": ");
-  Serial.print(inField, DEC);
-  Serial.println("}");
+  Serial.println("\"}");
 }
 
 /**
@@ -101,7 +99,7 @@ void loop() {
   //        It trigger right away for now.
   if (inField) {
     inField = false;
-    printSerNum();
+    // printSerNum();
     clearSerNum();
   }
 

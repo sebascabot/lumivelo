@@ -54,9 +54,7 @@ void printSerNum() {
     Serial.print(serNum[i], HEX);
   }
 
-  Serial.print("\", \"inField\": ");
-  Serial.print(inField, DEC);
-  Serial.println("}");
+  Serial.println("\"}");
 }
 
 void setup() {
@@ -83,7 +81,7 @@ void loop () {
 
   if (inField) {
     inField = false;
-    printSerNum();
+    // printSerNum();
     clearSerNum();
   }
 

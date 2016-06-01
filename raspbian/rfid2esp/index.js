@@ -41,21 +41,21 @@ var sp = new SerialPort(arduinoSerial.dev, {
 // RFID info: serial, command
 // ------------------------------------------------------------------------------
 var command2json = {
-  "black":     '{"color": [0, 0, 0]}',
+  "black":   '{"rgb": [0, 0, 0]}',
 
-  "red":     '{"color": [50, 0, 0]}',
-  "green":   '{"color": [0, 50, 0]}',
-  "blue":    '{"color": [0, 0, 50]}',
+  "red":     '{"rgb": [50, 0, 0]}',
+  "green":   '{"rgb": [0, 50, 0]}',
+  "blue":    '{"rgb": [0, 0, 50]}',
 
-  "fuchsia": '{"color": [50, 0, 50]}',
-  "aqua":    '{"color": [0, 50, 50]}',
+  "fuchsia": '{"rgb": [50, 0, 50]}',
+  "aqua":    '{"rgb": [0, 50, 50]}',
 
-  "purple":  '{"color": [20, 0, 20]}',
-  "coral":   '{"color": [50, 30, 0]}',
+  "purple":  '{"rgb": [20, 0, 20]}',
+  "coral":   '{"rgb": [50, 30, 0]}',
 
-  "rainbow":  '{"rainbow": true}',
-  "star":     '{"star": true}',
-  "dot":      '{"dot": true}',
+  "rainbow": '{"cmd": "rainbow"}',
+  "star":    '{"cmd": "star"   }',
+  "dot":     '{"cmd": "dot"    }',
 };
 
 var serial2command = {
@@ -123,27 +123,16 @@ sp.on("data", function (data) {
     return;
   }
 
-  if (!json.hasOwnProperty('inField')) {
-    console.log("ERROR: JSON data is missing 'inField' property: '" + data + "'.");
-    return;
-  }
+  // The RFID tag just landed...
+  serial = json.serialNumber;
+  command = serial2command[serial];
+  json = serial2json[serial];
 
-  if (json.inField) {
-    // The RFID tag just landed...
-
-    serial = json.serialNumber;
-    command = serial2command[serial];
-    json = serial2json[serial];
-
-    if (command) {
-      console.log("Send command: " + command);
-      sendDatagrams(json);
-    } else {
-      console.log("Send command: Black out --- serial#: " + serial);
-      sendDatagrams(command2json.black);
-    }
+  if (command) {
+    console.log("Send command: " + command);
+    sendDatagrams(json);
   } else {
-    // The RFID tag is leaving...
+    console.log("Black out --- unknown serial#: " + serial);
+    sendDatagrams(command2json.black);
   }
-
 });
