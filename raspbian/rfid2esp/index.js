@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
 var arduinoSerial = {
-    dev: "/dev/ttyUSB0", // Arduino Nano
+    //dev: "/dev/ttyUSB0", // Arduino Nano
     dev: "/dev/ttyACM0", // Arduino UNO
     speed: 115200
-}
+};
 
 var dgram = require('dgram');
 var assert = require('assert');
@@ -61,6 +61,8 @@ var command2json = {
   "rainbow": '{"fx": "rainbow"}',
   "star":    '{"fx": "star"   }',
   "dot":     '{"fx": "dot"    }',
+
+  "shutdown": JSON.stringify({shutdown: true}),
 };
 
 var serial2command = {
@@ -80,6 +82,8 @@ var serial2command = {
 
   // 2nd set of card
   "A5-91-64-44": 'red',
+
+  "A6-53-FD-4A": 'shutdown',
 };
 
 var serial2json = {};
@@ -135,6 +139,12 @@ sp.on("data", function (data) {
   serial = json.serialNumber;
   command = serial2command[serial];
   json = serial2json[serial];
+
+  if (command === 'shutdown') {
+      console.log("*** POWEROFF! ***");
+      require('child_process').spawn('shutdown', [ '-h', 'now']);
+      return;
+  }
 
   if (command) {
     console.log("Send command: " + command);
