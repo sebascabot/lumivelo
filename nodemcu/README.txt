@@ -1,8 +1,10 @@
 
-Install NodeMCU firmware with modules:
+1. Install NodeMCU firmware with modules:
   bit cjson file gpio net node tmr uart wifi ws2801 ws2812.
 
-Upload the files
+  > ./esptool.py --port /dev/ttyUSB0 write_flash -fm qio -fs 4m 0x00000 nodemcu-master-11-modules-2016-06-01-12-14-07-integer.bin
+
+2. Upload the files
 
     connect.lua : Connect to our RFID WiFi network
      status.lua : Display connect status

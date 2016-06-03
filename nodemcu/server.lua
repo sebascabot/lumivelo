@@ -9,8 +9,8 @@ if (s) then
 end
 tmr.unregister(0)
 tmr.unregister(1)
-blackPixel = string.char(0, 0, 0)
-ws2812.writergb(2, blackPixel:rep(ledsLen))
+lightRedPixel = string.char(5, 0, 0)
+ws2812.writergb(2, lightRedPixel:rep(ledsLen))
 
 print('Creating UPD server ...')
 s = net.createServer(net.UDP)
