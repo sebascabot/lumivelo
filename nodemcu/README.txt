@@ -10,9 +10,9 @@
      status.lua : Display connect status
      server.lua : Listen for UDP data and display proper light pattern
 
-    rainbow.lua : Custom effect
-       star.lua : Custom effect
-        doc.lua : Custom effect
+    rainbow.lua : Custom effect : A run of color segment moving along the led strip
+       star.lua : Custom effect : A full run of random color segments
+        dot.lua : Custom effect : Random color segments, with black space without them
 
        init.lua : call the three above in sequence at ESP/NodeMCU power up.
 
